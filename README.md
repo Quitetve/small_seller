@@ -1,6 +1,6 @@
 # small_seller
 
-A new Flutter project.
+Lab Assignment 2
 
 ## Getting Started
 
