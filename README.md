@@ -1,6 +1,6 @@
 # small_seller
 
-Lab Assignment 2
+Lab Assignment 2 & project
 
 ## Getting Started
 
