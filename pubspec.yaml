@@ -25,14 +25,20 @@ dependencies:
     sdk: flutter
   animated_splash: ^1.0.0
   syncfusion_flutter_gauges: ^18.2.44
-
   
+
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.0
   progress_dialog: ^1.2.0
-
+  image_picker:
+  shared_preferences: ^0.5.3+4
+  toast: ^0.1.5
+  http:
+  cached_network_image: ^2.0.0
+  flutter_cache_manager:
+  image_cropper: ^1.2.2
 
 dev_dependencies:
   flutter_test:
@@ -50,7 +56,8 @@ flutter:
 
    uses-material-design: true
    assets:
-       - assets/images/smallseller.png
+     - assets/images/
+
 
   # To add assets to your application, add an assets section, like this:
  #assets:

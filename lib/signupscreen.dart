@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:small_seller/loginscreen.dart';
+import 'package:http/http.dart' as http;
+// import 'package:small_seller/user.dart';
 
 void main() {
   runApp(MaterialApp(
     home: RegisterScreen(),
     theme: ThemeData(
-      brightness: Brightness.dark,
+      brightness: Brightness.light,
     ),
   ));
 }
@@ -16,19 +18,42 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
-  TextEditingController nameController1 = TextEditingController();
-  TextEditingController nameController2 = TextEditingController();
-  TextEditingController nameController3 = TextEditingController();
-  TextEditingController nameController4 = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
+  TextEditingController nameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController userController = TextEditingController();
+  TextEditingController passController = TextEditingController();
+  TextEditingController repassController = TextEditingController();
+
+  String _businessname = "";
+  String _email = "";
+  String _username = "";
+  String _password = "";
 
   bool agree = false;
   var _formKey = GlobalKey<FormState>();
   var isLoading = false;
 
   // This function is triggered when the button is clicked
-  void _doSomething() {
+  void _doSomethingelse() {
     // Do something
+    _businessname = nameController.text;
+    _email = emailController.text;
+    _username = userController.text;
+    _password = passController.text;
+
+    http.post("https://abiykuomel.com/smallseller/php/register_seller.php",
+        body: {
+          "businessname": _businessname,
+          "email": _email,
+          "username": _username,
+          "password": _password,
+        }).then((res) {
+      print(res.body);
+    }).catchError((err) {
+      print(err);
+    });
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => LoginScreen()));
   }
 
   @override
@@ -55,7 +80,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 Container(
                   padding: EdgeInsets.all(5),
                   child: TextField(
-                    controller: nameController1,
+                    controller: nameController,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
                       labelText: 'Business Name',
@@ -66,7 +91,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   padding: EdgeInsets.all(5),
                   child: TextField(
                     key: _formKey,
-                    controller: nameController2,
+                    controller: emailController,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
                       labelText: 'Email',
@@ -77,7 +102,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 Container(
                   padding: EdgeInsets.all(5),
                   child: TextField(
-                    controller: nameController3,
+                    controller: userController,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
                       labelText: 'User Name',
@@ -88,7 +113,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   padding: EdgeInsets.all(5),
                   child: TextField(
                     obscureText: true,
-                    controller: nameController4,
+                    controller: passController,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
                       labelText: 'Password',
@@ -99,7 +124,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
                   child: TextField(
                     obscureText: true,
-                    controller: passwordController,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
                       labelText: 'Re-Password',
@@ -125,8 +149,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       )
                     ],
                   ),
-                  ElevatedButton(
-                      onPressed: agree ? _doSomething : null,
+                  RaisedButton(
+                      onPressed: agree ? _doSomethingelse : null,
                       child: Text('Sign up'))
                 ]),
                 Container(
@@ -142,10 +166,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       onPressed: () {
                         //sigin screen
                         Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => LoginScreen()),
-                        );
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => LoginScreen()));
                       },
                     )
                   ],

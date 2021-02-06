@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:animated_splash/animated_splash.dart';
 import 'loginscreen.dart';
 
